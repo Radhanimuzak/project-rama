@@ -18,7 +18,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use App\Http\Middleware\OnlyAdmin;
+use App\Http\Middleware\RoleMiddleware;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -52,10 +52,10 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-                Onlyadmin::class,
             ])
             ->authMiddleware([
                 Authenticate::class,
+                RoleMiddleware::class . ':admin',
             ]);
     }
 }
