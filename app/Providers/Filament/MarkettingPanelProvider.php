@@ -31,12 +31,16 @@ class MarkettingPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Emerald,
             ])
-            ->discoverResources(in: app_path('Filament/Marketting/Resources'), for: 'App\Filament\Marketting\Resources')
-            ->discoverPages(in: app_path('Filament/Marketting/Pages'), for: 'App\Filament\Marketting\Pages')
+            ->resources([
+                // \App\Filament\Resources\UserResource::class,
+                \App\Filament\Resources\Leadsdatas\LeadsDataResource::class,
+                // Add more resources here as needed
+            ])
+            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
                 Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Marketting/Widgets'), for: 'App\Filament\Marketting\Widgets')
+            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
                 AccountWidget::class,
                 FilamentInfoWidget::class,
