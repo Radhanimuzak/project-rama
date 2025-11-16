@@ -8,6 +8,7 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Actions\DeleteAction;
 
 class LeadsdatasTable
 {
@@ -44,6 +45,7 @@ class LeadsdatasTable
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
+                DeleteAction::make()->successNotificationTitle('Data Succesfully deleted'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
