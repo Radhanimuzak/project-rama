@@ -50,9 +50,9 @@ class LeadsdataResource extends Resource
     {
         return [
             'index' => ListLeadsdatas::route('/'),
-            'create' => CreateLeadsdata::route('/create'),
-            'view' => ViewLeadsdata::route('/{record}'),
-            'edit' => EditLeadsdata::route('/{record}/edit'),
+            // 'create' => CreateLeadsdata::route('/create'),
+            // 'view' => ViewLeadsdata::route('/{record}'),
+            // 'edit' => EditLeadsdata::route('/{record}/edit'),
         ];
     }
 }

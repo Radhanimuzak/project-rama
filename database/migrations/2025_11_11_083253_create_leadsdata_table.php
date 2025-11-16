@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('leadsdata', function (Blueprint $table) {
             $table->id();
-            $table->string('customer_name'); // customer person name
-            $table->string('sales_name'); // sales person name
+            $table->string('customer_name')->nullable(); // customer person name
+            $table->string('sales_name')->nullable(); // sales person name
             $table->string('contact_number')->unique(); // phone number customer
-            $table->string('product'); // product name
+            $table->string('product')->nullable(); // product name
             $table->string('status')->default('waiting'); // waiting, approved, rejected, follow_up
-            $table->string('source_leads'); // facebook, instagram, website, referral
-            $table->text('note')->nullable(); // notes about the lead
-            $table->string('method'); // gmeet, zoom, call, meetup
+            $table->string('source_leads')->nullable(); // facebook, instagram, website, referral
+            $table->text('note')->nullable()->nullable(); // notes about the lead
+            $table->string('method')->nullable(); // gmeet, zoom, call, meetup
             $table->timestamps();
         });
     }

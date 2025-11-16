@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\Users\Schemas;
 use Filament\Forms\Components\TextInput;
-
 use Filament\Schemas\Schema;
 use Filament\Forms\Components\Select;
 
@@ -23,6 +22,7 @@ class UsersForm
                     ->maxLength(255),
                 TextInput::make('password')
                     ->label('password')
+                    ->revealable()
                     ->required()
                     ->password()
                     ->maxLength(255),
