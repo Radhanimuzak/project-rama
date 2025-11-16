@@ -28,6 +28,7 @@ class LeadsdataMarkettingResource extends Resource
 
     protected static ?string $navigationLabel = 'Marketing Leads Data';
 
+
     public static function form(Schema $schema): Schema
     {
         return LeadsdataMarkettingForm::configure($schema);

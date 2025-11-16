@@ -25,6 +25,10 @@ class LeadsdataSalesResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'Leadsdatasales';
 
+    protected static ?string $slug = 'SalesLeadsData';
+
+    protected static ?string $navigationLabel = 'Sales Leads Data';
+
     public static function form(Schema $schema): Schema
     {
         return LeadsdataSalesForm::configure($schema);

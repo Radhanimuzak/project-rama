@@ -43,8 +43,8 @@ class UsersResource extends Resource
     {
         return [
             'index' => ListUsers::route('/'),
-            'create' => CreateUsers::route('/create'),
-            'edit' => EditUsers::route('/{record}/edit'),
+            // 'create' => CreateUsers::route('/create'),
+            // 'edit' => EditUsers::route('/{record}/edit'),
         ];
     }
 }
