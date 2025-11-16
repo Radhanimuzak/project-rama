@@ -25,22 +25,24 @@ class SalesPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+            ->brandName('Marksys')
             ->id('sales')
             ->path('sales')
             ->login()
             ->colors([
                 'primary' => Color::Indigo,
             ])
+            
             ->resources([
                 // \App\Filament\Resources\UserResource::class,
-                \App\Filament\Resources\Leadsdatas\LeadsDataResource::class,
+                \App\Filament\Resources\Leadsdatasales\LeadsdataSalesResource::class,
                 // Add more resources here as needed
             ])
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
+            ->discoverPages(in: app_path('Filament/LeadsDataSales/Pages'), for: 'App\Filament\LeadsDataSales\Pages')
             ->pages([
                 Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
+            ->discoverWidgets(in: app_path('Filament/LeadsDataSales/Widgets'), for: 'App\Filament\LeadsDataSales\Widgets')
             ->widgets([
                 AccountWidget::class,
                 FilamentInfoWidget::class,

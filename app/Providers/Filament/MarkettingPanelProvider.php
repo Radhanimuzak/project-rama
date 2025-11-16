@@ -19,12 +19,14 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Http\Middleware\RoleMiddleware;
+use App\Filament\Resources\LeadsdataMarkettings;
 
 class MarkettingPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
+            ->brandName('Marksys')
             ->id('marketting')
             ->path('marketting')
             ->login()
@@ -33,14 +35,14 @@ class MarkettingPanelProvider extends PanelProvider
             ])
             ->resources([
                 // \App\Filament\Resources\UserResource::class,
-                \App\Filament\Resources\Leadsdatas\LeadsDataResource::class,
+                \App\Filament\Resources\LeadsdataMarkettings\LeadsDataMarkettingResource::class,
                 // Add more resources here as needed
             ])
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
+            ->discoverPages(in: app_path('Filament/LeadsdataMarkettings/Pages'), for: 'App\Filament\LeadsdataMarkettings\Pages')
             ->pages([
                 Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
+            ->discoverWidgets(in: app_path('Filament/LeadsdataMarkettings/Widgets'), for: 'App\FilamentLeadsdataMarkettings\Widgets')
             ->widgets([
                 AccountWidget::class,
                 FilamentInfoWidget::class,
