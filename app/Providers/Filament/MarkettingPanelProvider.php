@@ -45,7 +45,7 @@ class MarkettingPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/LeadsdataMarkettings/Widgets'), for: 'App\FilamentLeadsdataMarkettings\Widgets')
             ->widgets([
                 AccountWidget::class,
-                FilamentInfoWidget::class,
+                // FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
