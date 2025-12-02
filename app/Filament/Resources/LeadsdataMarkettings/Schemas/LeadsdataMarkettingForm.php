@@ -52,6 +52,20 @@ class LeadsdataMarkettingForm // ✅ Fixed class name
                         'call' => 'By Call',
                         'meetup' => 'Meet Up',
                     ]),
+                TextInput::make('target_price')
+                    ->required()
+                    ->numeric()
+                    ->integer()
+                    ->minValue(0)
+                    ->prefix('RM')
+                    ->inputMode('numeric'),
+                TextInput::make('fixed_price')
+                    ->numeric()
+                    ->integer()
+                    ->minValue(0)
+                    ->prefix('RM')
+                    ->inputMode('numeric')
+                    ->disabled(),
             ]);
     }
 }

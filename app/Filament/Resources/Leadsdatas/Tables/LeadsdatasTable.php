@@ -30,6 +30,12 @@ class LeadsdatasTable
                     ->searchable(),
                 TextColumn::make('method')
                     ->searchable(),
+                TextColumn::make('target_price')
+                    ->searchable()
+                    ->prefix('RM'),
+                TextColumn::make('fixed_price')
+                    ->searchable()
+                    ->prefix('RM'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

@@ -18,6 +18,8 @@ class LeadsdataInfolist
                 TextEntry::make('status'),
                 TextEntry::make('source_leads'),
                 TextEntry::make('method'),
+                TextEntry::make('target_price'),
+                TextEntry::make('fixed_price'),
                 TextEntry::make('created_at')
                     ->dateTime(),
                 TextEntry::make('updated_at')

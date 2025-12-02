@@ -23,6 +23,8 @@ class LeadsData extends Model
         'source_leads',
         'note',
         'method',
+        'target_price',
+        'fixed_price',
     ];
 
     // The attributes that should be hidden for arrays

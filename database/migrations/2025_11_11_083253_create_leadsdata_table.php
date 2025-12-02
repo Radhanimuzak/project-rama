@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('source_leads')->nullable(); // facebook, instagram, website, referral
             $table->text('note')->nullable()->nullable(); // notes about the lead
             $table->string('method')->nullable(); // gmeet, zoom, call, meetup
+            $table->string('target_price')->nullable(); // price offered
+            $table->string('fixed_price')->nullable(); // price offered
             $table->timestamps();
         });
     }

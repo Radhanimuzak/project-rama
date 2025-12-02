@@ -29,10 +29,10 @@ class LeadsdataResource extends Resource
         return LeadsdataForm::configure($schema);
     }
 
-    public static function infolist(Schema $schema): Schema
-    {
-        return LeadsdataInfolist::configure($schema);
-    }
+    // public static function infolist(Schema $schema): Schema
+    // {
+    //     return LeadsdataInfolist::configure($schema);
+    // }
 
     public static function table(Table $table): Table
     {
