@@ -54,10 +54,13 @@ class MarkettingPanelProvider extends PanelProvider
             ->pages([
                 Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/LeadsdataMarkettings/Widgets'), for: 'App\FilamentLeadsdataMarkettings\Widgets')
+            ->discoverWidgets(in: app_path('Filament/LeadsdataMarkettings/Widgets'), for: 'App\Filament\LeadsdataMarkettings\Widgets')
             ->widgets([
                 AccountWidget::class,
                 // FilamentInfoWidget::class,
+                \App\Filament\LeadsdataMarkettings\Widgets\StatsOverviewMarketting::class,
+                \App\Filament\LeadsdataMarkettings\Widgets\LeadsChartMarketting::class,
+                \App\Filament\LeadsdataMarkettings\Widgets\LatestLeadsMarketting::class,
             ])
             ->middleware([
                 EncryptCookies::class,

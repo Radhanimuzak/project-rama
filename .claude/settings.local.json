@@ -4,7 +4,9 @@
       "Bash(dir /s \"c:\\xampp\\htdocs\\project-rama\\app\\Filament\")",
       "Bash(dir /s \"c:\\xampp\\htdocs\\project-rama\\resources\")",
       "Bash(npm run build:*)",
-      "Bash(php artisan:*)"
+      "Bash(php artisan:*)",
+      "Bash(php check_status.php:*)",
+      "Bash(php -r:*)"
     ],
     "deny": [],
     "ask": []

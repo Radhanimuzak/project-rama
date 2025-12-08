@@ -1,47 +1,58 @@
 <?php
 
-namespace App\Filament\Widgets;
+namespace App\Filament\LeadsDataSales\Widgets;
 
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
-
 use App\Models\Leadsdata;
-use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 
-class StatsOverview extends BaseWidget
-
+class StatsOverviewSales extends StatsOverviewWidget
 {
     protected function getStats(): array
     {
-        // Calculate counts by status
-        $totalLeads = Leadsdata::count();
+        // Calculate counts by status (using actual database values)
         $waitingCount = Leadsdata::where('status', 'waiting')->count();
         $approvedCount = Leadsdata::where('status', 'approved')->count();
         $followUpCount = Leadsdata::where('status', 'follow-up')->count();
         $rejectedCount = Leadsdata::where('status', 'rejected')->count();
 
-        // Calculate averages (EXCLUDE REJECTED - no transaction happened)
+        // Calculate average target price from marketing (EXCLUDE REJECTED - no transaction)
         $avgTargetPrice = Leadsdata::where('status', '!=', 'rejected')
             ->whereNotNull('target_price')
             ->avg('target_price') ?? 0;
+
+        // Calculate target fixed price (5% above target price for sales)
+        $targetFixedPrice = $avgTargetPrice * 1.05;
+
+        // Calculate average actual fixed price (EXCLUDE REJECTED - no transaction)
         $avgFixedPrice = Leadsdata::where('status', '!=', 'rejected')
             ->whereNotNull('fixed_price')
             ->avg('fixed_price') ?? 0;
-        $avgProfit = $avgFixedPrice - $avgTargetPrice;
 
-        // Calculate target fixed price (5% above)
-        $targetFixedPrice = $avgTargetPrice * 1.05;
+        // Determine color based on performance:
+        // RED: Below 95% (too low, losing money)
+        // BLUE/PRIMARY: Between 95% - 105% (at target range)
+        // GREEN: Above 105% (exceeding target, great!)
+        $priceLower = $avgTargetPrice * 0.95;  // 5% below target
+        $priceTarget = $avgTargetPrice * 1.05; // target (5% above)
+
+        if ($avgFixedPrice < $priceLower) {
+            $priceColor = 'danger';
+            $priceDescription = '✗ BELOW TARGET (< 95%)';
+            $priceIcon = 'heroicon-m-exclamation-triangle';
+        } elseif ($avgFixedPrice >= $priceTarget) {
+            $priceColor = 'success';
+            $priceDescription = '✓ EXCEEDING TARGET (≥ 105%)';
+            $priceIcon = 'heroicon-m-check-badge';
+        } else {
+            $priceColor = 'primary';
+            $priceDescription = '◉ AT TARGET RANGE (95%-105%)';
+            $priceIcon = 'heroicon-m-check-circle';
+        }
 
         return [
-            Stat::make('TOTAL LEADS', $totalLeads)
-                ->description('ALL LEADS IN SYSTEM')
-                ->descriptionIcon('heroicon-m-arrow-trending-up')
-                ->icon('heroicon-o-users')
-                ->color('primary')
-                ->chart([7, 3, 4, 5, 6, 3, 5, 3]),
-
             Stat::make('WAITING APPROVAL', $waitingCount)
-                ->description('PENDING REVIEW')
+                ->description('NEEDS SALES REVIEW')
                 ->descriptionIcon('heroicon-m-clock')
                 ->icon('heroicon-o-clock')
                 ->color('warning')
@@ -75,26 +86,19 @@ class StatsOverview extends BaseWidget
                 ->color('info')
                 ->chart([5, 4, 6, 7, 5, 6, 8, 7]),
 
-            Stat::make('TARGET FIXED (+5%)', 'RM ' . number_format($targetFixedPrice, 0))
-                ->description('SALES TARGET GOAL')
+            Stat::make('TARGET FIXED PRICE', 'RM ' . number_format($targetFixedPrice, 0))
+                ->description('5% ABOVE TARGET (GOAL)')
                 ->descriptionIcon('heroicon-m-arrow-trending-up')
                 ->icon('heroicon-o-arrow-trending-up')
                 ->color('primary')
                 ->chart([5, 5, 6, 7, 6, 7, 8, 8]),
 
-            Stat::make('AVG FIXED PRICE', 'RM ' . number_format($avgFixedPrice, 0))
-                ->description('ACTUAL AVERAGE')
-                ->descriptionIcon('heroicon-m-banknotes')
+            Stat::make('ACTUAL FIXED PRICE', 'RM ' . number_format($avgFixedPrice, 0))
+                ->description($priceDescription)
+                ->descriptionIcon($priceIcon)
                 ->icon('heroicon-o-banknotes')
-                ->color('success')
+                ->color($priceColor)
                 ->chart([4, 5, 5, 6, 5, 7, 7, 6]),
-
-            Stat::make('AVG PROFIT', 'RM ' . number_format($avgProfit, 0))
-                ->description('PROFIT MARGIN')
-                ->descriptionIcon('heroicon-m-chart-bar')
-                ->icon('heroicon-o-chart-bar')
-                ->color($avgProfit > 0 ? 'success' : 'danger')
-                ->chart([3, 4, 5, 6, 6, 7, 8, 8]),
         ];
     }
 }

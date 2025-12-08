@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Filament\Widgets;
+namespace App\Filament\LeadsDataSales\Widgets;
 
 use App\Models\Leadsdata;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
 
-class LatestLeads extends BaseWidget
+class LatestLeadsSales extends BaseWidget
 {
-    protected static ?string $heading = 'ALL LEADS - ADMIN DASHBOARD';
+    protected static ?string $heading = 'ALL LEADS - SALES DASHBOARD';
 
     protected static ?int $sort = 1;
 

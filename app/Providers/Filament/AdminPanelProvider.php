@@ -59,9 +59,10 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 AccountWidget::class,
                 // FilamentInfoWidget::class,
-                \App\Filament\Widgets\LatestLeads::class,
-                \App\Filament\Widgets\LeadsChart::class,
                 \App\Filament\Widgets\StatsOverview::class,
+                \App\Filament\Widgets\LeadsChart::class,
+                \App\Filament\Widgets\ProfitBySourceChart::class,
+                \App\Filament\Widgets\LatestLeads::class,
             ])
             ->middleware([
                 EncryptCookies::class,

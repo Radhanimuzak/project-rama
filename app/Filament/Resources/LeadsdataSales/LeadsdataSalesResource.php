@@ -27,7 +27,9 @@ class LeadsdataSalesResource extends Resource
 
     protected static ?string $slug = 'SalesLeadsData';
 
-    protected static ?string $navigationLabel = 'Sales Leads Data';
+    protected static ?string $navigationLabel = 'LEADS DATA';
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Schema $schema): Schema
     {

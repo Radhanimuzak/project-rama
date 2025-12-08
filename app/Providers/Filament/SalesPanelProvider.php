@@ -58,6 +58,9 @@ class SalesPanelProvider extends PanelProvider
             ->widgets([
                 AccountWidget::class,
                 // FilamentInfoWidget::class,
+                \App\Filament\LeadsDataSales\Widgets\StatsOverviewSales::class,
+                \App\Filament\LeadsDataSales\Widgets\LeadsStatusChart::class,
+                \App\Filament\LeadsDataSales\Widgets\LatestLeadsSales::class,
             ])
             ->middleware([
                 EncryptCookies::class,
