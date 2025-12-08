@@ -31,7 +31,19 @@ class MarkettingPanelProvider extends PanelProvider
             ->path('marketting')
             ->login()
             ->colors([
-                'primary' => Color::Emerald,
+                'primary' => [
+                    50 => '#eff6ff',
+                    100 => '#dbeafe',
+                    200 => '#bfdbfe',
+                    300 => '#93c5fd',
+                    400 => '#60a5fa',
+                    500 => '#1e3a8a',
+                    600 => '#182f6f',
+                    700 => '#122453',
+                    800 => '#0c1938',
+                    900 => '#060d1c',
+                    950 => '#03060e',
+                ],
             ])
             ->resources([
                 // \App\Filament\Resources\UserResource::class,

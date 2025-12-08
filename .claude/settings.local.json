@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir /s \"c:\\xampp\\htdocs\\project-rama\\app\\Filament\")",
+      "Bash(dir /s \"c:\\xampp\\htdocs\\project-rama\\resources\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -9,6 +9,7 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Support\Enums\FontWeight;
 
 
 class LeadsdataMarkettingsTable
@@ -18,25 +19,50 @@ class LeadsdataMarkettingsTable
        return $table
             ->columns([
                 TextColumn::make('customer_name')
-                    ->searchable(),
+                    ->label('Customer Name')
+                    ->searchable()
+                    ->sortable()
+                    ->weight(FontWeight::SemiBold),
                 TextColumn::make('sales_name')
-                    ->searchable(),
+                    ->label('Sales Name')
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('contact_number')
-                    ->searchable(),
+                    ->label('Contact Number')
+                    ->searchable()
+                    ->copyable()
+                    ->copyMessage('Contact copied!'),
                 TextColumn::make('product')
-                    ->searchable(),
+                    ->searchable()
+                    ->badge(),
                 TextColumn::make('status')
-                    ->searchable(),
+                    ->searchable()
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'approved' => 'success',
+                        'waiting' => 'warning',
+                        'rejected' => 'danger',
+                        default => 'gray',
+                    }),
                 TextColumn::make('source_leads')
-                    ->searchable(),
+                    ->label('Source')
+                    ->searchable()
+                    ->badge(),
                 TextColumn::make('method')
-                    ->searchable(),
+                    ->searchable()
+                    ->badge(),
                 TextColumn::make('target_price')
+                    ->label('Target Price')
                     ->searchable()
-                    ->prefix('RM'),
+                    ->sortable()
+                    ->money('MYR')
+                    ->color('success'),
                 TextColumn::make('fixed_price')
+                    ->label('Fixed Price')
                     ->searchable()
-                    ->prefix('RM'),
+                    ->sortable()
+                    ->money('MYR')
+                    ->color('primary'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -46,6 +72,7 @@ class LeadsdataMarkettingsTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])
