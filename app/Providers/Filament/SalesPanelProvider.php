@@ -57,7 +57,7 @@ class SalesPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/LeadsDataSales/Widgets'), for: 'App\Filament\LeadsDataSales\Widgets')
             ->widgets([
                 AccountWidget::class,
-                FilamentInfoWidget::class,
+                // FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
