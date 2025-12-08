@@ -11,10 +11,10 @@ use Filament\Widgets\TableWidget as BaseWidget;
 
 class LatestLeads extends BaseWidget
 {
-    protected static ?string $heading = 'Latest Leads';
+    protected static ?string $heading = 'LATEST LEADS';
 
     protected static ?int $sort = 1;
-    
+
     protected int|string|array $columnSpan = 'full';
 
     public function table(Table $table): Table
@@ -22,12 +22,25 @@ class LatestLeads extends BaseWidget
         return $table
             ->query(Leadsdata::query()->latest()->limit(5))
             ->columns([
-                Tables\Columns\TextColumn::make('customer_name'),
-                Tables\Columns\TextColumn::make('product'),
+                Tables\Columns\TextColumn::make('customer_name')
+                    ->label('CUSTOMER NAME')
+                    ->searchable()
+                    ->sortable()
+                    ->weight('bold')
+                    ->icon('heroicon-m-user'),
+                Tables\Columns\TextColumn::make('product')
+                    ->label('PRODUCT')
+                    ->searchable()
+                    ->sortable()
+                    ->icon('heroicon-m-shopping-bag'),
                 Tables\Columns\TextColumn::make('source_leads')
-                    ->badge(),
-                Tables\Columns\TextColumn::make('status')
+                    ->label('SOURCE')
                     ->badge()
+                    ->icon('heroicon-m-globe-alt'),
+                Tables\Columns\TextColumn::make('status')
+                    ->label('STATUS')
+                    ->badge()
+                    ->icon('heroicon-m-check-circle')
                     ->color(fn (string $state): string => match ($state) {
                         'waiting' => 'warning',
                         'success' => 'success',
@@ -35,12 +48,25 @@ class LatestLeads extends BaseWidget
                         default => 'gray',
                     }),
                 Tables\Columns\TextColumn::make('target_price')
-                    ->money('MYR'),
+                    ->label('TARGET PRICE')
+                    ->money('MYR')
+                    ->icon('heroicon-m-currency-dollar')
+                    ->color('success')
+                    ->weight('semibold'),
                 Tables\Columns\TextColumn::make('fixed_price')
-                    ->money('MYR'),
+                    ->label('FIXED PRICE')
+                    ->money('MYR')
+                    ->icon('heroicon-m-banknotes')
+                    ->color('primary')
+                    ->weight('semibold'),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('CREATED AT')
                     ->dateTime()
-                    ->sortable(),
-            ]);
+                    ->sortable()
+                    ->icon('heroicon-m-calendar')
+                    ->color('gray'),
+            ])
+            ->striped()
+            ->defaultSort('created_at', 'desc');
     }
 }
